@@ -18,10 +18,13 @@ import {
   IsNumber,
   IsString,
   IsInt,
+  IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
 import { Product } from "../../product/base/Product";
+import { Shipment } from "../../shipment/base/Shipment";
+import { EnumOrderStatus } from "./EnumOrderStatus";
 
 @ObjectType()
 class Order {
@@ -80,6 +83,26 @@ class Order {
     nullable: true,
   })
   quantity!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Shipment],
+  })
+  @ValidateNested()
+  @Type(() => Shipment)
+  @IsOptional()
+  shipments?: Array<Shipment>;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumOrderStatus,
+  })
+  @IsEnum(EnumOrderStatus)
+  @IsOptional()
+  @Field(() => EnumOrderStatus, {
+    nullable: true,
+  })
+  status?: "Draft" | "Confirmed" | "Shipped" | "Delivered" | null;
 
   @ApiProperty({
     required: false,
