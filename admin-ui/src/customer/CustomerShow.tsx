@@ -53,6 +53,7 @@ export const CustomerShow = (props: ShowProps): React.ReactElement => {
               <TextField source={PRODUCT_TITLE_FIELD} />
             </ReferenceField>
             <TextField label="Quantity" source="quantity" />
+            <TextField label="Status" source="status" />
             <TextField label="Total Price" source="totalPrice" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>

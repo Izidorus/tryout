@@ -12,12 +12,14 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
+import { ShipmentListRelationFilter } from "../../shipment/base/ShipmentListRelationFilter";
+import { EnumOrderStatus } from "./EnumOrderStatus";
 
 @InputType()
 class OrderWhereInput {
@@ -77,6 +79,29 @@ class OrderWhereInput {
     nullable: true,
   })
   quantity?: IntNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ShipmentListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ShipmentListRelationFilter)
+  @IsOptional()
+  @Field(() => ShipmentListRelationFilter, {
+    nullable: true,
+  })
+  shipments?: ShipmentListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumOrderStatus,
+  })
+  @IsEnum(EnumOrderStatus)
+  @IsOptional()
+  @Field(() => EnumOrderStatus, {
+    nullable: true,
+  })
+  status?: "Draft" | "Confirmed" | "Shipped" | "Delivered";
 
   @ApiProperty({
     required: false,

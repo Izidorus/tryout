@@ -12,9 +12,17 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { ValidateNested, IsOptional, IsNumber, IsInt } from "class-validator";
+import {
+  ValidateNested,
+  IsOptional,
+  IsNumber,
+  IsInt,
+  IsEnum,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
+import { ShipmentUpdateManyWithoutOrdersInput } from "./ShipmentUpdateManyWithoutOrdersInput";
+import { EnumOrderStatus } from "./EnumOrderStatus";
 
 @InputType()
 class OrderUpdateInput {
@@ -63,6 +71,29 @@ class OrderUpdateInput {
     nullable: true,
   })
   quantity?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ShipmentUpdateManyWithoutOrdersInput,
+  })
+  @ValidateNested()
+  @Type(() => ShipmentUpdateManyWithoutOrdersInput)
+  @IsOptional()
+  @Field(() => ShipmentUpdateManyWithoutOrdersInput, {
+    nullable: true,
+  })
+  shipments?: ShipmentUpdateManyWithoutOrdersInput;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumOrderStatus,
+  })
+  @IsEnum(EnumOrderStatus)
+  @IsOptional()
+  @Field(() => EnumOrderStatus, {
+    nullable: true,
+  })
+  status?: "Draft" | "Confirmed" | "Shipped" | "Delivered" | null;
 
   @ApiProperty({
     required: false,

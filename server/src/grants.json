@@ -298,5 +298,65 @@
     "resource": "Product",
     "action": "read:any",
     "attributes": "*"
+  },
+  {
+    "role": "customer",
+    "resource": "Shipment",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Shipment",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "customer",
+    "resource": "Shipment",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Shipment",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customer",
+    "resource": "Shipment",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Shipment",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customer",
+    "resource": "Shipment",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Shipment",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customer",
+    "resource": "Shipment",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Shipment",
+    "action": "read:any",
+    "attributes": "*"
   }
 ]
