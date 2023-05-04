@@ -7,5 +7,6 @@ export type Product = {
   itemPrice: number | null;
   name: string | null;
   orders?: Array<Order>;
+  status: string | null;
   updatedAt: Date;
 };

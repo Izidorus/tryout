@@ -27,6 +27,7 @@ export const ProductCreate = (props: CreateProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={OrderTitle} />
         </ReferenceArrayInput>
+        <TextInput label="Status" source="status" />
       </SimpleForm>
     </Create>
   );
